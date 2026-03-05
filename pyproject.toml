@@ -1,0 +1,67 @@
+ [build-system]
+ requires = ["setuptools>=69", "wheel"]
+ build-backend = "setuptools.build_meta"
+ 
+ [project]
+ name = "gogi-bot"
+ version = "0.1.0"
+ description = "Python-only crypto bot skeleton (CEX+DEX, perps)"
+ readme = "README.md"
+ requires-python = ">=3.11"
+ license = { text = "MIT" }
+ authors = [{ name = "gogi-eng" }]
+ dependencies = [
+   "pydantic>=2",
+   "python-dotenv>=1",
+   "PyYAML>=6",
+ ]
+ 
+ [project.optional-dependencies]
+ dev = [
+   "pytest>=8",
+   "ruff>=0.6",
+   "mypy>=1.10",
+ ]
+ cex = [
+   "ccxt>=4",
+ ]
+ marketdata = [
+   "cryptofeed>=2",
+ ]
+ dex = [
+   "hyperliquid-python-sdk>=0",
+   "dydx-v4-client>=1",
+   "web3>=6",
+   "eth-account>=0.13",
+   "uniswap-python>=0.7",
+ ]
+ backtest = [
+   "numpy>=2",
+   "pandas>=2",
+   "vectorbt>=0.28",
+ ]
+ analytics = [
+   "empyrical>=0.5",
+   "quantstats>=0.0.81",
+ ]
+ 
+ [tool.setuptools]
+ package-dir = {"" = "src"}
+ 
+ [tool.setuptools.packages.find]
+ where = ["src"]
+ 
+ [tool.pytest.ini_options]
+ testpaths = ["tests"]
+ 
+ [tool.ruff]
+ line-length = 100
+ target-version = "py311"
+ 
+ [tool.mypy]
+ python_version = "3.11"
+ warn_return_any = true
+ warn_unused_configs = true
+ disallow_untyped_defs = false
+ no_implicit_optional = true
+ strict_equality = true

@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: gogi-bot
+Version: 0.1.0
+Summary: Python-only crypto bot skeleton (CEX+DEX, perps)
+Author: gogi-eng
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: pydantic>=2
+Requires-Dist: python-dotenv>=1
+Requires-Dist: PyYAML>=6
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Provides-Extra: cex
+Requires-Dist: ccxt>=4; extra == "cex"
+Provides-Extra: marketdata
+Requires-Dist: cryptofeed>=2; extra == "marketdata"
+Provides-Extra: dex
+Requires-Dist: hyperliquid-python-sdk>=0; extra == "dex"
+Requires-Dist: dydx-v4-client>=1; extra == "dex"
+Requires-Dist: web3>=6; extra == "dex"
+Requires-Dist: eth-account>=0.13; extra == "dex"
+Requires-Dist: uniswap-python>=0.7; extra == "dex"
+Provides-Extra: backtest
+Requires-Dist: numpy>=2; extra == "backtest"
+Requires-Dist: pandas>=2; extra == "backtest"
+Requires-Dist: vectorbt>=0.28; extra == "backtest"
+Provides-Extra: analytics
+Requires-Dist: empyrical>=0.5; extra == "analytics"
+Requires-Dist: quantstats>=0.0.81; extra == "analytics"
+
+# Python Crypto Bot Skeleton (CEX+DEX, Perps)
+
+Repository skeleton for building a **Python-only** trading bot codebase with clean module boundaries:
+
+- `connectors/`: CEX connectivity/execution (CCXT + exchange-specific SDK adapters)
+- `dex/`: DEX perps + EVM swap execution
+- `marketdata/`: ingestion/normalization (WS/REST)
+- `orderbook/`: snapshot+delta book + microstructure features
+- `strategies/`: strategy interfaces + example stubs
+- `risk/`: risk guards, sizing, circuit breakers
+- `backtest/`: research/backtest adapters (vectorbt/backtrader/etc.)
+- `analytics/`: performance metrics + reports
+
+## Quick start
+
+Create venv, install in editable mode:
+
+`python -m venv .venv && source .venv/bin/activate && pip install -U pip && pip install -e ".[dev]"`
+
+Run tests:
+
+`pytest -q`
+
+## Notes
+
+- This repo intentionally ships **interfaces and minimal stubs**. Add credentials via env vars / secret manager.
+- Prefer optional extras (`.[cex]`, `.[dex]`, `.[marketdata]`, `.[backtest]`, `.[analytics]`) to keep installs lean.
